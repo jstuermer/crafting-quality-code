@@ -1,0 +1,7 @@
+# Conda environment
+/bin/
+/conda-meta/
+/include/
+/lib/
+/share/
+/ssl/
