@@ -7,41 +7,41 @@ restaurants_small.txt.
 Restaurant name to rating:
 # dict of {str: int}
 {
-    "Georgie Porgie": 87,
-    "Queen St. Cafe": 82,
-    "Dumplings R Us": 71,
-    "Mexican Grill": 85,
-    "Deep Fried Everything": 52
+    'Georgie Porgie': 87,
+    'Queen St. Cafe': 82,
+    'Dumplings R Us': 71,
+    'Mexican Grill': 85,
+    'Deep Fried Everything': 52
 }
 
 Price to list of restaurant names:
 # dict of {str: list of str}
 {
-    "$": ["Queen St. Cafe", "Dumplings R Us", "Deep Fried Everything"],
-    "$$": ["Mexican Grill",],
-    "$$$": ["Georgie Porgie"],
-    "$$$$": []
+    '$': ['Queen St. Cafe', 'Dumplings R Us', 'Deep Fried Everything'],
+    '$$': ['Mexican Grill',],
+    '$$$': ['Georgie Porgie'],
+    '$$$$': []
 }
 
 Cuisine to list of restaurant names:
 # dict of {str: list of str}
 {
-    "Canadian": ["Georgie Porgie"],
-    "Pub Food": ["Georgie Porgie", "Deep Fried Everything"],
-    "Malaysian": ["Queen St. Cafe"],
-    "Thai": ["Queen St. Cafe"],
-    "Chinese": ["Dumplings R Us"],
-    "Mexican": ["Mexican Grill"]
+    'Canadian': ['Georgie Porgie'],
+    'Pub Food': ['Georgie Porgie', 'Deep Fried Everything'],
+    'Malaysian': ['Queen St. Cafe'],
+    'Thai': ['Queen St. Cafe'],
+    'Chinese': ['Dumplings R Us'],
+    'Mexican': ['Mexican Grill']
 }
 
-Given this data, a price of "$" and a list of cuisines like ["Chinese", "Thai"],
+Given this data, a price of '$' and a list of cuisines like ['Chinese', 'Thai'],
 we would produce the following list, which is sorted according to the ratings:
 
-    [[82, "Queen St. Cafe"], [71, "Dumplings R Us"]]
+    [[82, 'Queen St. Cafe'], [71, 'Dumplings R Us']]
 """
 
 # The file containing the restaurant data
-FILENAME = "restaurants_small.txt"
+FILENAME = 'restaurants_small.txt'
 
 def recommend(file, price, cuisines_list):
     """
@@ -103,15 +103,15 @@ def build_rating_list(name_to_rating, restaurant_names):
     Examples
     --------
     >>> name_to_rating = {
-        "Georgie Porgie": 87,
-        "Queen St. Cafe": 82,
-        "Dumplings R Us": 71,
-        "Mexican Grill": 85,
-        "Deep Fried Everything": 52
-    }
-    >>> names = ["Queen St. Cafe", "Dumplings R Us"]
+    ...     'Georgie Porgie': 87,
+    ...     'Queen St. Cafe': 82,
+    ...     'Dumplings R Us': 71,
+    ...     'Mexican Grill': 85,
+    ...     'Deep Fried Everything': 52
+    ... }
+    >>> names = ['Queen St. Cafe', 'Dumplings R Us']
     >>> build_rating_list(name_to_rating, names)
-    [[82, "Queen St. Cafe"], [71, "Dumplings R Us"]]
+    [[82, 'Queen St. Cafe'], [71, 'Dumplings R Us']]
     """
 
     rating_list = [[name_to_rating[name], name] for name in restaurant_names]
@@ -141,18 +141,18 @@ def filter_by_cuisine(restaurant_names, cuisine_to_names, cuisines_list):
 
     Examples
     --------
-    >>> names = ["Queen St. Cafe", "Dumplings R Us", "Deep Fried Everything"]
+    >>> names = ['Queen St. Cafe', 'Dumplings R Us', 'Deep Fried Everything']
     >>> cuisine_to_names = {
-        "Canadian": ["Georgie Porgie"],
-        "Pub Food": ["Georgie Porgie", "Deep Fried Everything"],
-        "Malaysian": ["Queen St. Cafe"],
-        "Thai": ["Queen St. Cafe"],
-        "Chinese": ["Dumplings R Us"],
-        "Mexican": ["Mexican Grill"]
-    }
-    >>> cuisines_list = ["Chinese", "Thai"]
+    ...     'Canadian': ['Georgie Porgie'],
+    ...     'Pub Food': ['Georgie Porgie', 'Deep Fried Everything'],
+    ...     'Malaysian': ['Queen St. Cafe'],
+    ...     'Thai': ['Queen St. Cafe'],
+    ...     'Chinese': ['Dumplings R Us'],
+    ...     'Mexican': ['Mexican Grill']
+    ... }
+    >>> cuisines_list = ['Chinese', 'Thai']
     >>> filter_by_cuisine(names, cuisine_to_names, cuisines_list)
-    ["Queen St. Cafe", "Dumplings R Us"]
+    ['Queen St. Cafe', 'Dumplings R Us']
     """
 
     restaurants_filtered = []
@@ -185,7 +185,7 @@ def read_restaurants(file):
     """
 
     name_to_rating = {}
-    price_to_names = {"$": [], "$$": [], "$$$": [], "$$$$": []}
+    price_to_names = {'$': [], '$$': [], '$$$': [], '$$$$': []}
     cuisine_to_names = {}
 
     props_per_restaurant = 4 # number of properties per restaurant
@@ -200,7 +200,7 @@ def read_restaurants(file):
         name = props[start]
         rating = props[start+1][0:-1] # excluding the % symbol
         price = props[start+2]
-        cuisines = props[start+3].split(",")
+        cuisines = props[start+3].split(',')
 
         # Add properties to dictionaries
         name_to_rating[name] = rating
@@ -235,3 +235,7 @@ def get_props(file):
         props = [p.strip() for p in filter(lambda l: len(l.strip()) > 0, lines)]
 
     return props
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
