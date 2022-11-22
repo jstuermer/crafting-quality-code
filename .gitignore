@@ -5,3 +5,6 @@
 /lib/
 /share/
 /ssl/
+
+# Python files
+/**/__pycache__/
