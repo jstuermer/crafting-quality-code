@@ -11,3 +11,6 @@
 
 # Peer-reviews
 /reviews/
+
+# VS Code settings
+/.vscode/
