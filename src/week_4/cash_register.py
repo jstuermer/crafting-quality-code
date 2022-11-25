@@ -46,9 +46,25 @@ class CashRegister:
         self.tens = tens
         self.twenties = twenties
 
+    def __str__(self) -> str:
+        """
+        Return a string representation of this CashRegister.
+
+        Examples
+        --------
+        >>> reg1 = CashRegister(1, 2, 3, 4, 5)
+        >>> reg1.__str__()
+        'CashRegister: $160 (1x1$, 2x2$, 3x5$, 4x10$, 5x20$)'
+        """
+
+        return "CashRegister: $%d (%dx1$, %dx2$, %dx5$, %dx10$, %dx20$)" %(
+            self.get_total(), self.ones, self.twos, self.fives, self.tens, self.twenties
+        )
+
     def __eq__(self, other) -> bool:
         """
-        Return True if and only if self and other have the same total amount of money.
+        Return True if and only if the two CashRegisters self and other have the same
+        total amount of money.
 
         Parameters
         ----------
