@@ -46,6 +46,30 @@ class CashRegister:
         self.tens = tens
         self.twenties = twenties
 
+    def __eq__(self, other) -> bool:
+        """
+        Return True if and only if self and other have the same total amount of money.
+
+        Parameters
+        ----------
+        other : CashRegister
+            The other CashRegister to compare self to.
+
+        Examples
+        --------
+        >>> reg1 = CashRegister(2, 0, 0, 0, 0)
+        >>> reg2 = CashRegister(0, 1, 0, 0, 0)
+        >>> reg1 == reg2
+        True
+
+        >>> reg1 = CashRegister(2, 0, 0, 0, 0)
+        >>> reg2 = CashRegister(0, 2, 0, 0, 0)
+        >>> reg1 == reg2
+        False
+        """
+
+        return self.get_total() == other.get_total()
+
     def get_total(self) -> int:
         """
         Return the total amount of cash stored in the register.
