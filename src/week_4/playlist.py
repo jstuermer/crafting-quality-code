@@ -6,6 +6,13 @@ class Playlist:
 
     Parameters
     ----------
+    title : str
+        The title of the playlist.
+    songs : List[Song]
+        A list of songs that stores which songs have been added to the playlist.
+
+    Examples
+    --------
     >>> playlist = Playlist("Canadian Artists")
     >>> playlist.title
     'Canadian Artists'
