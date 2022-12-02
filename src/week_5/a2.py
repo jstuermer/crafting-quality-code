@@ -134,7 +134,7 @@ class Maze:
 
     Parameters
     ----------
-    contents : List[List[str]]
+    maze : List[List[str]]
         A 2D list of the contents present in the maze. Each item should be a str of
         length 1.
     rat_1 : Rat
@@ -162,11 +162,11 @@ class Maze:
     3
     """
 
-    def __init__(self, contents: list, rat_1: Rat, rat_2: Rat) -> None:
-        self.contents = contents
+    def __init__(self, maze: list, rat_1: Rat, rat_2: Rat) -> None:
+        self.maze = maze
         self.rat_1 = rat_1
         self.rat_2 = rat_2
-        self.num_sprouts_left = sum(l.count(SPROUT) for l in self.contents[1:-1])
+        self.num_sprouts_left = sum(l.count(SPROUT) for l in self.maze[1:-1])
 
     def is_wall(self, row: int, col: int) -> bool:
         """
@@ -196,7 +196,7 @@ class Maze:
         False
         """
 
-        return self.contents[row][col] == WALL
+        return self.maze[row][col] == WALL
 
     def get_character(self, row: int, col: int) -> str:
         """
@@ -236,14 +236,14 @@ class Maze:
         if (self.rat_2.row, self.rat_2.col) == (row, col):
             return self.rat_2.symbol
 
-        return self.contents[row][col]
+        return self.maze[row][col]
 
     def move(self, rat: Rat, vertical_change: str, horizontal_change: str) -> bool:
         """
         Move the rat in the given direction, unless there is a wall in the way.
 
         If the character at the new location is a sprout, the rat eats it according to
-        `Rat.eat_sprout`. The sprout character in `maze.contents` is then replaced with
+        `Rat.eat_sprout`. The `SPROUT` character in the maze is then replaced with
         a `HALL`.
 
         Parameters
@@ -295,10 +295,12 @@ class Maze:
             return False
 
         if self.get_character(new_row, new_col) == SPROUT:
-            self.contents[new_row][new_col] = HALL
+            self.maze[new_row][new_col] = HALL
             rat.num_sprouts_eaten += 1
 
+        self.maze[rat.row][rat.col] = HALL
         rat.set_location(new_row, new_col)
+
         return True
 
     def __str__(self) -> str:
@@ -329,12 +331,12 @@ class Maze:
         """
 
         s = ''
-        for (row, row_contents) in enumerate(self.contents):
+        for (row, row_maze) in enumerate(self.maze):
             if self.rat_1.row == row:
-                row_contents[self.rat_1.col] = self.rat_1.symbol
+                row_maze[self.rat_1.col] = self.rat_1.symbol
             if self.rat_2.row == row:
-                row_contents[self.rat_2.col] = self.rat_2.symbol
-            s += ''.join(row_contents) + '\n'
+                row_maze[self.rat_2.col] = self.rat_2.symbol
+            s += ''.join(row_maze) + '\n'
 
         s += str(self.rat_1) + '\n' + str(self.rat_2)
 
